@@ -21,7 +21,7 @@ func main() {
 	var wg sync.WaitGroup
 	var collector []prometheus.Collector
 
-	cfgPath, err := config.ParseFlags()
+	cfgPath, outPath, err := config.ParseFlags()
 	if err != nil {
 		logrus.Fatal(err)
 	}
@@ -59,6 +59,9 @@ func main() {
 
 	wg.Wait()
 
-	metrics.DumpFile("./cron_exporter.prom", collector)
+	if err := metrics.DumpFile(outPath, collector); err != nil {
+		logrus.Error(err.Error())
+	}
+
 	defer os.Exit(0)
 }
