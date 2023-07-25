@@ -1,0 +1,26 @@
+- metric_name: hello
+  path: logs/app.log
+  query: hellobo
+  mode: full_search 
+  labels: 
+    on_zone: d1
+    on_part_of: monitoring
+    
+- metric_name: semar_ok
+  path: logs/app-semar-ok.log
+  query: semar
+  mode: first_of_line
+  labels: 
+    on_zone: d1
+
+- metric_name: semar_failed
+  path: logs/app-semar-failed.log
+  query: semar
+  mode: first_of_line
+  labels: 
+    on_zone: d1
+
+- metric_name: lemper
+  path: logs/app.log
+  query: lemper
+  mode: last_of_line
